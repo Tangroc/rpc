@@ -1,0 +1,18 @@
+import edu.bupt.rpc.core.annotation.RpcScan;
+import edu.bupt.rpc.core.config.RpcServiceConfig;
+import edu.bupt.rpc.core.remote.transport.netty.server.NettyRpcServer;
+import hello.impl.HelloRpcImpl1;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+@RpcScan(basePackage = {"hello"})
+public class NettyServer {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(NettyServer.class);
+        NettyRpcServer nettyRpcServer = context.getBean("nettyRpcServer", NettyRpcServer.class);
+        nettyRpcServer.registerService(RpcServiceConfig.builder()
+                .version("1.0")
+                .group("s1")
+                .service(new HelloRpcImpl1()).build());
+        nettyRpcServer.start();
+    }
+}
