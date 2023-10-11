@@ -9,10 +9,6 @@ public class NettyServer {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(NettyServer.class);
         NettyRpcServer nettyRpcServer = context.getBean("nettyRpcServer", NettyRpcServer.class);
-        nettyRpcServer.registerService(RpcServiceConfig.builder()
-                .version("1.0")
-                .group("s1")
-                .service(new HelloRpcImpl1()).build());
         nettyRpcServer.start();
     }
 }

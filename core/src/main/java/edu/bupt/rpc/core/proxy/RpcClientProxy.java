@@ -1,6 +1,5 @@
 package edu.bupt.rpc.core.proxy;
 
-import com.sun.org.apache.xml.internal.dtm.ref.sax2dtm.SAX2DTM2;
 import edu.bupt.rpc.core.config.RpcServiceConfig;
 import edu.bupt.rpc.core.remote.dto.RpcRequest;
 import edu.bupt.rpc.core.remote.dto.RpcResponse;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.net.Socket;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 

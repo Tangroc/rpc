@@ -8,6 +8,6 @@ public class ZkServiceRegistryImpl implements ServiceRegistry {
     @Override
     public void registryService(String rpcServiceName, InetSocketAddress inetSocketAddress) {
         String servicePath = CuratorUtils.ZK_REGISTER_ROOT_PATH + "/" + rpcServiceName + inetSocketAddress.toString();
-        CuratorUtils.createPersistentNode(CuratorUtils.getZkClient(),servicePath);
+        CuratorUtils.createNode(CuratorUtils.getZkClient(),servicePath,false);
     }
 }

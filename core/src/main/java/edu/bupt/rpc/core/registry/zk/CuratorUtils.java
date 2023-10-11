@@ -32,17 +32,20 @@ public class CuratorUtils {
     private CuratorUtils() {
     }
 
-    public static void createPersistentNode(CuratorFramework zkClient, String path) {
+    public static void createNode(CuratorFramework zkClient, String path,boolean persistent) {
         try {
             if (REGISTERED_PATH_SET.contains(path) || zkClient.checkExists().forPath(path) != null) {
-                log.error("The node already exists. The node is:[{}]", path);
+                log.info("The node already exists. The node is:[{}]", path);
             } else {
-                zkClient.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path);
+                zkClient.create()
+                        .creatingParentsIfNeeded()
+                        .withMode(persistent?CreateMode.PERSISTENT:CreateMode.EPHEMERAL)
+                        .forPath(path);
                 log.info("The node was created successfully. The node is:[{}]", path);
             }
             REGISTERED_PATH_SET.add(path);
         } catch (Exception e) {
-            log.error("create persistent node for path [{}] fail", path);
+            log.error("create node for path [{}] fail", path);
         }
     }
 
